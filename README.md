@@ -24,6 +24,7 @@
 	```	
 	
 	* Cuando una entidad tiene una realación con otra entidad, a la misma se le debe agregar la anotación @OneToMany o @ManyToOne, según corresponda. En este caso, como la relación se da de uno a muchos (de forma unidireccional) entre Paciente y Consulta, en la entidad Paciente se debe agregar la anotación @OneToMany en el método 'get' correspondiente.
+	* Las entidades que tengan identidad 'autogenerada' o 'autonumérica', deben incluir la anotación @GeneratedValue junto con la anotación @Id correspondiente.
 	* En caso de que las tablas no tengan nombres que sigan la convención de JPA, es necesario agregar más detalles a las relaciones @OneToMany y @ManyToOne. En este caso, es necesario indicar a través de qué columnas se harán los JOIN mediante la anotación [@JoinColumns](https://docs.oracle.com/javaee/6/api/javax/persistence/JoinColumns.html). Como se observa en la documentación, @JoinColumns define varios [@JoinColumn](https://docs.oracle.com/javaee/6/api/javax/persistence/JoinColumn.html), uno para cada columna de la tabla con la que se haga el JOIN para relacionar a las dos entidades. En este caso, es necesario que a cada anotación @JoinColumn agregue la propiedad *nullable=false* (de lo contrario, se permitiría crear una sentencia SQL que no inserte las llaves foráneas):
 
 		```java
